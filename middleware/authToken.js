@@ -12,7 +12,6 @@ module.exports = function(req, res, next) {
     try {
         // Проверяем, начинается ли токен с 'Bearer '
         const bearerToken = token.split(' ')[1];  // Извлекаем сам токен, убирая 'Bearer '
-        console.log(bearerToken);
         // Проверяем токен
         const decoded = jwt.verify(bearerToken, '1234JDKJDSFKJsd');  // Ваш секретный ключ
 
