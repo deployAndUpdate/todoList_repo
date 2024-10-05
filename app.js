@@ -2,8 +2,6 @@ const express = require('express');
 const { 
   connectToAtlasDb, 
   connectToLocalDb,
-  listAtlasDatabases,
-  listLocalDatabases,
   getAtlasDb,
   getLocalDb 
 } = require('./db');
@@ -33,15 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));  // Обслуживание HTML-файла
 });
-
-app.get('/chlen', async (req, res) => {
-  const localDb = getLocalDb();  // Получаем доступ к локальной базе данных
-  const testCollection = localDb.collection('test');  // Обращаемся к коллекции 'test' в базе 'sample_mflix'
-  // Выполняем запрос и преобразуем результат в массив
-  const test = await testCollection.find().toArray();
-  let itemToDisplay = test[0].item.name;
-  res.send(itemToDisplay);
-})
 
 // Middleware для обработки данных формы и JSON
 app.use(express.urlencoded({ extended: true }));

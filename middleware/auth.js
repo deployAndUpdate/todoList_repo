@@ -1,17 +1,22 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
-    // Получаем токен из заголовков
-    const token = req.header('x-auth-token');
-
-    // Проверяем наличие токена
+    // Извлекаем токен из заголовка Authorization
+    const token = req.header('Authorization');
+    
+    // Проверяем, передан ли токен
     if (!token) {
         return res.status(401).json({ msg: 'Нет токена, авторизация отклонена' });
     }
 
-    // Проверяем токен
     try {
-        const decoded = jwt.verify(token, 'секретный_ключ');  // Верификация токена
+        // Проверяем, начинается ли токен с 'Bearer '
+        const bearerToken = token.split(' ')[1];  // Извлекаем сам токен, убирая 'Bearer '
+        console.log(bearerToken);
+        // Проверяем токен
+        const decoded = jwt.verify(bearerToken, '1234JDKJDSFKJsd');  // Ваш секретный ключ
+
+        // Добавляем информацию о пользователе в объект запроса
         req.user = decoded.user;
         next();
     } catch (err) {
