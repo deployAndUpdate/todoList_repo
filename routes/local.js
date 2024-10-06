@@ -51,4 +51,23 @@ router.get('/data', async (req, res) => {
     }
 });
 
+router.post('/delete', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const db = getLocalDb();
+    const userCollection = db.collection('users');
+
+    // Проверяем, существует ли пользователь
+    let user = await userCollection.findOne({ email });
+    if (user) {
+      await userCollection.deleteOne({email});
+      return res.status(201).json({ msg: 'Пользователь удален' });
+    } else {
+      return res.status(400).json({ msg: 'Пользователь не найден' });
+    }
+} catch (err) {
+    console.error('Ошибка сервера:', err.message);
+    res.status(500).send('Ошибка сервера');
+}
+});
 module.exports = router;
