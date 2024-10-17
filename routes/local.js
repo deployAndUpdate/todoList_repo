@@ -42,9 +42,8 @@ router.get('/data', async (req, res) => {
         throw new Error('Не удалось получить доступ к локальной базе данных');
         }
 
-        const testCollection = localDb.collection('test');  // Обращаемся к коллекции 'test'
+        const testCollection = localDb.collection('users');  // Обращаемся к коллекции 'test'
         const items = await testCollection.find().toArray();  // Получаем все данные из коллекции
-
         res.status(200).json(items);  // Отправляем данные в формате JSON
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -53,6 +52,7 @@ router.get('/data', async (req, res) => {
 
 router.post('/delete', async (req, res) => {
   const { email } = req.body;
+  console.log(email);
   try {
     const db = getLocalDb();
     const userCollection = db.collection('users');

@@ -2,17 +2,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить данные</title>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
-    <h1>Добавить запись в MongoDB</h1>
+    <h1>Админ панель</h1>
 
     <form id="dataForm">
-        <label for="name">Введите имя:</label>
-        <input type="text" id="name" name="name" required>
-        <button type="submit">Отправить</button>
-        <button type="button" id="getDataButton">Получить список</button>
-
+        <label for="email">Введите имя:</label>
+        <input type="text" id="email" name="email" required>
+        <label for="password">Введите пароль:</label>
+        <input type="text" id="password" name="password">
+        <button type="submit">Создать пользователя</button>
+        <button type="button" id="deleteUserButton">Удалить пользователя</button>
+        <button type="button" id="getDataButton">Получить список пользователей</button>
     </form>
 
     <p id="responseMessage"></p>

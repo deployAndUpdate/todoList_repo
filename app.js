@@ -6,6 +6,7 @@ const {
   getLocalDb 
 } = require('./db');
 const path = require('path');
+require('dotenv').config();
 
 
 const app = express();
@@ -29,6 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Главная страница
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'main.html'));
+  // res.send('Hello, World! This is your Task Manager!');
+});
+
+app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));  // Обслуживание HTML-файла
 });
 

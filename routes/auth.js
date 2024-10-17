@@ -11,6 +11,7 @@ router.post('/register', [
     check('email', 'Введите корректный email').isEmail(),
     check('password', 'Пароль должен содержать минимум 6 символов').isLength({ min: 6 })
 ], async (req, res) => {
+    debugger
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
